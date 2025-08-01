@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-app.use("/api/v1/todos", todoRoutes); // Routes after middleware: made a mistake here, put routes before middleware
+app.use("/api/v1/todos", todoRoutes); // Routes after middleware: made a mistake here, put routes before middleware. wondered why the create route was throwing 500 FIXME: fix this
 
 app.get("/", (req: Request, res: Response): void => {
   res.json({
