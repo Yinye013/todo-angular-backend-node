@@ -4,11 +4,12 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import cors from "cors";
 import connectDB from "./config/db.config";
+import todoRoutes from "./routes/todo.routes";
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-console.log(PORT);
+app.use("/api/todos", todoRoutes);
 
 connectDB();
 
