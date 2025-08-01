@@ -8,7 +8,7 @@ const createTodo = async (req: Request, res: Response) => {
     if (!text || text.trim() === "") {
       return res.status(400).json({ message: "Text is required" });
     }
-    const newTodo = new Todo({ text });
+    const newTodo = new Todo({ text: text.trim() });
     await newTodo.save();
     res.status(201).json({
       success: true,
