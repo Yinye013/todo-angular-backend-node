@@ -1,11 +1,12 @@
-import { Router } from "express";
-import {
+const { Router } = require("express");
+const {
   createTodo,
   getTodoById,
   getTodos,
   updateTodo,
   deleteTodo,
-} from "../controllers/todo.controller";
+} = require("../controllers/todo.controller");
+
 const router = Router();
 
 // @route   POST /api/todos
@@ -33,4 +34,4 @@ router.put("/:id", updateTodo);
 // @access  Public
 router.delete("/:id", deleteTodo);
 
-export default router;
+module.exports = router;

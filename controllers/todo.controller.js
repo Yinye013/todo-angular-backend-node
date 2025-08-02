@@ -1,8 +1,7 @@
-import mongoose from "mongoose";
-import Todo from "../models/todo.model";
-import { Request, Response } from "express";
+const mongoose = require("mongoose");
+const Todo = require("../models/todo.model");
 
-const createTodo = async (req: Request, res: Response) => {
+const createTodo = async (req, res) => {
   try {
     const { text } = req.body;
     if (!text || text.trim() === "") {
@@ -20,7 +19,7 @@ const createTodo = async (req: Request, res: Response) => {
   }
 };
 
-const getTodos = async (req: Request, res: Response) => {
+const getTodos = async (req, res) => {
   try {
     const todos = await Todo.find().sort({ createdAt: 1 }); //I am sorting here: 1 means ascending(oldest first), -1 means descending (newest newest first)
     res.status(200).json({
@@ -34,7 +33,7 @@ const getTodos = async (req: Request, res: Response) => {
   }
 };
 
-const getTodoById = async (req: Request, res: Response) => {
+const getTodoById = async (req, res) => {
   try {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -56,7 +55,7 @@ const getTodoById = async (req: Request, res: Response) => {
   }
 };
 
-const updateTodo = async (req: Request, res: Response) => {
+const updateTodo = async (req, res) => {
   try {
     const { id } = req.params;
     const { text, completed } = req.body;
@@ -77,7 +76,7 @@ const updateTodo = async (req: Request, res: Response) => {
   }
 };
 
-const deleteTodo = async (req: Request, res: Response) => {
+const deleteTodo = async (req, res) => {
   try {
     const { id } = req.params;
     const deletedTodo = await Todo.findByIdAndDelete(id);
@@ -90,4 +89,4 @@ const deleteTodo = async (req: Request, res: Response) => {
   }
 };
 
-export { createTodo, getTodos, getTodoById, updateTodo, deleteTodo };
+module.exports = { createTodo, getTodos, getTodoById, updateTodo, deleteTodo };
