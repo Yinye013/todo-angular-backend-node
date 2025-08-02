@@ -22,8 +22,7 @@ const createTodo = async (req: Request, res: Response) => {
 
 const getTodos = async (req: Request, res: Response) => {
   try {
-    const todos = await Todo.find().sort({ createdAt: -1 });
-    console.log(todos);
+    const todos = await Todo.find().sort({ createdAt: 1 }); //I am sorting here: 1 means ascending(oldest first), -1 means descending (newest newest first)
     res.status(200).json({
       success: true,
       message: "Todos fetched successfully",
@@ -64,9 +63,6 @@ const updateTodo = async (req: Request, res: Response) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ message: "Invalid ID format" });
     }
-    console.log(
-      `Updating todo with ID: ${id}, text: ${text}, completed: ${completed}`
-    );
     const updatedTodo = await Todo.findByIdAndUpdate(
       id,
       { text, completed },
